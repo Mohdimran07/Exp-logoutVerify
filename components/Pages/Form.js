@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
 import { useState } from "react";
 import classes from "./Form.module.css";
+import axios from 'axios';
 
 const Form = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const ConfirmPasswordRef = useRef();
   const [isLogin, setIsLogin] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
+
 
   const switchModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -20,31 +21,27 @@ const Form = () => {
     const enteredPassword = passwordInputRef.current.value;
     const enteredConfirmPassword = ConfirmPasswordRef.current.value;
 
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD1BTMA7z79Hl-kprnDA2dYOj0ZeIHyiEs",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          confirmPassword : enteredConfirmPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((res) => {
-      if(res.ok){
-        console.log('user sucessfully signed-Up')
-      } else {
-        return res.json().then(data => {
-          console.log(data);
-        })
-      }
+     
+    axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD1BTMA7z79Hl-kprnDA2dYOj0ZeIHyiEs",{
+      email: enteredEmail,
+      password: enteredPassword,
+      confirmPassword : enteredConfirmPassword,
+      returnSecureToken: true,
+    }).then((res) => {
+      console.log(res)
+      console.log(res.data.idToken)
+      axios.post('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyD1BTMA7z79Hl-kprnDA2dYOj0ZeIHyiEs',{
+        enteredEmail,
+        requestType: "VERIFY_EMAIL",
+        idToken: res.data.idToken
+      }).then(data => {
+        console.log(data);
+        alert(prompt(''))
+      })
+     
     })
       
-  
+
 
   };
   return (
