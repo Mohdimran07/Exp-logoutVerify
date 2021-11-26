@@ -1,0 +1,41 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import ExpenseContext from "../../Stores/Expense-context";
+
+import classes from "./MainNavigation.module.css";
+
+const MainNavigation = () => {
+  const expCtx = useContext(ExpenseContext);
+  const isLoggedIn = expCtx.isLoggedIn;
+  return (
+    <header className={classes.header}>
+      <Link to="/home">
+        <div className={classes.logo}>Expense Tracker</div>
+      </Link>
+      <nav>
+        <ul>
+          {isLoggedIn && (
+             <li>
+             <Link to="/login">Login</Link>
+           </li>
+          )}
+         
+          {/* {!isLoggedIn && (
+            <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          )}
+          
+           {!isLoggedIn && (
+            <li>
+            <button>Logout</button>
+          </li>
+           )} */}
+          
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
+export default MainNavigation;
