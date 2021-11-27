@@ -1,11 +1,14 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef,} from "react";
 import classes from "./Profileform.module.css";
 import ExpenseContext from "../../Stores/Expense-context";
+import axios from "axios";
+
 
 const Profileform = () => {
   const nameRef = useRef();
   const profileRef = useRef();
   const expCtx = useContext(ExpenseContext);
+  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -30,8 +33,19 @@ const Profileform = () => {
       }
     ).then((res) => {
       console.log(res);
-    });
-  };
+      axios.get('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyD1BTMA7z79Hl-kprnDA2dYOj0ZeIHyiEs',{
+       idToken: res.data.idToken,
+      }).then(data => {
+          console.log(data)
+      })
+      
+    }).catch(err => {
+        console.log(err);
+    })
+
+   
+
+};
   return (
     <section className={classes.contain}>
       <header>
