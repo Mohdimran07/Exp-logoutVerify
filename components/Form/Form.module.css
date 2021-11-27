@@ -31,7 +31,7 @@
 }
 
 .toggle button {
-  cursor: pointer;
+   cursor: pointer;
   font: inherit;
   color: white;
   background-color: #9f5ccc;
