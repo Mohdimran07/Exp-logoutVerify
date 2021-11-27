@@ -7,6 +7,9 @@ import classes from "./MainNavigation.module.css";
 const MainNavigation = () => {
   const expCtx = useContext(ExpenseContext);
   const isLoggedIn = expCtx.isLoggedIn;
+  const logoutHandler = () => {
+    expCtx.logout();
+  }
   return (
     <header className={classes.header}>
       <Link to="/home">
@@ -28,11 +31,11 @@ const MainNavigation = () => {
           </li>
           )}
           
-           {/* {!isLoggedIn && (
+           {isLoggedIn && (
             <li>
-            <button>Logout</button>
+            <button onClick={logoutHandler}>Logout</button>
           </li>
-           )}  */}
+           )} 
           
         </ul>
       </nav>
