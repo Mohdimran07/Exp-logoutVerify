@@ -4,6 +4,7 @@ import HomePage from "./Pages/HomePage";
 import "./App.css";
 import FormPage from "./Pages/FormPage";
 import ProfilePage from "./Pages/ProfilePage";
+import ForgotPage from './Pages/ForgotPage';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path='/profile'>
           <ProfilePage />
+        </Route>
+        <Route path = '/forgot' >
+          <ForgotPage />
         </Route>
       </Switch>
     </Layout>

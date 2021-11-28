@@ -24,11 +24,23 @@
 }
 
 .toggle {
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.toggle .btn{
+  cursor: pointer;
+  background-color: transparent;
+  color: #9f5ccc;
+  border: none;
+  padding: 0.15rem 1.5rem;
+}
+
+/* .toggle .btn:hover{
+  background-color: #630f9b;
+  border-color: #540c85;
+} */
 
 .toggle button {
    cursor: pointer;
@@ -45,7 +57,7 @@
 }
 
 .toggle .actions {
-  margin-top: 1rem;
+  /* margin-top: rem; */
   background-color: transparent;
   color: #9f5ccc;
   border: none;

@@ -4,6 +4,7 @@ import classes from "./Form.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
 import ExpenseContext from "../../Stores/Expense-context";
+import { Link } from "react-router-dom";
 
 const Form = () => {
   const history = useHistory();
@@ -37,9 +38,9 @@ const Form = () => {
           returnSecureToken: true,
         })
         .then((data) => {
-          console.log(data.data.idToken)
+          console.log(data.data.idToken);
           expCtx.login(data.data.idToken);
-          history.replace('/home');
+          history.replace("/home");
         })
         .catch((err) => {
           alert("Authentical failed");
@@ -101,7 +102,10 @@ const Form = () => {
         <br></br>
 
         <div className={classes.toggle}>
+          {!isLogin ? '' :  <p><Link to="/forgot">Forgot</Link></p> }
+        
           {<button>{isLogin ? "Login" : "Create Account"}</button>}
+
           <button
             type="button"
             className={classes.actions}
